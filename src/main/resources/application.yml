@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: flowguard
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/flowguard}
+    username: ${DB_USERNAME:flowguard}
+    password: ${DB_PASSWORD:flowguard}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+
+server:
+  port: ${PORT:8088}
+
+flowguard:
+  timezone: ${FLOWGUARD_TZ:UTC}
+  airflow:
+    base-url: ${AIRFLOW_URL:http://localhost:8080}
+    username: ${AIRFLOW_USER:airflow}
+    password: ${AIRFLOW_PASSWORD:airflow}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      probes:
+        enabled: true
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
